@@ -41,13 +41,14 @@
     "flow": "flow",
     "hooks": "babel-node scripts/hooks",
     "lint": "eslint .",
-    "postversion": "npm run build-documentation && npm run build-readme && npm run build-examples && npm run clean-release && npm run build-release && cd release && npm install",
+    "postversion": "npm run clean-release && npm run build-release && cd release && npm install",
     "prepublish": "npm run test",
     "preversion": "npm run lint && npm run test",
     "resume": "npm prune && npm update && npm dedupe && npm outdate --long",
     "setup": "git config push.followTags true && babel-node scripts/hooks install",
     "sort": "babel-node scripts/sort",
-    "test": "mocha \"*.test.js\""
+    "test": "mocha \"*.test.js\"",
+    "version": "npm run build-documentation && npm run build-readme && npm run build-examples"
   },
   "version": "0.3.0"
 }

@@ -9,12 +9,16 @@ guardedSpawnSync('documentation', [ 'build',
 	stdio: 'inherit'
 })
 
-// guardSpawnSync(spawnSync('git', [ 'add', '.' ], {
-// 	cwd: join(process.cwd(), 'documentation'),
-// 	stdio: 'inherit'
-// }))
-//
-// guardSpawnSync(spawnSync('git', [ 'commit', '--no-verify', '-m', `Documentation for ${version}`], {
-// 	cwd: join(process.cwd(), 'documentation'),
-// 	stdio: 'inherit'
-// }))
+guardedSpawnSync('git', [ 'add', version ], {
+	cwd: join(process.cwd(), 'documentation'),
+	stdio: 'inherit'
+})
+
+guardedSpawnSync('git', [ 'commit', '--no-verify', '-m', `Documentation for version ${version}`], {
+	cwd: join(process.cwd(), 'documentation'),
+	stdio: 'inherit'
+})
+
+guardedSpawnSync('git', [ 'add', 'documentation' ], {
+	stdio: 'inherit'
+})

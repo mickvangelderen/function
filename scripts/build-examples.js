@@ -2,6 +2,7 @@ import { version } from '../package.json'
 import { join } from 'path'
 import createFileTransformerSync from './utility/createFileTransformerSync'
 import createJsonTransformer from './utility/createJsonTransformer'
+import guardedSpawnSync from '../scripts/utility/guardedSpawnSync'
 
 // Set version number in package.json
 createFileTransformerSync(
@@ -34,3 +35,8 @@ function transformDependencies(input) {
 		return output
 	}, {})
 }
+
+guardedSpawnSync('git', [ 'add', 'package.json' ], {
+	cwd: join(process.cwd(), 'examples'),
+	stdio: 'inherit'
+})

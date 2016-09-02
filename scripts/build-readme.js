@@ -3,6 +3,7 @@ import { version } from '../package.json'
 import { createReadStream } from 'fs'
 import { createWriteStream } from 'fs'
 import { renameSync } from 'fs'
+import guardedSpawnSync from '../scripts/utility/guardedSpawnSync'
 
 const HEADING_VALUE = 'Documentation'
 const README_FILE = 'readme.md'
@@ -71,4 +72,8 @@ createReadStream(README_FILE)
 	.pipe(createWriteStream(README_FILE + '.temp'))
 	.on('finish', () => {
 			renameSync(README_FILE + '.temp', README_FILE)
+
+			guardedSpawnSync('git', [ 'add', README_FILE ], {
+				stdio: 'inherit'
+			})
 	})
