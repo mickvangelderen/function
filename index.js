@@ -1,5 +1,4 @@
 export { default as _ } from './_'
-export { default as createConfigurablePropertyDescriptor } from './createConfigurablePropertyDescriptor'
 export { default as partial } from './partial'
 export { default as setFunctionArity } from './setFunctionArity'
 export { default as setFunctionName } from './setFunctionName'

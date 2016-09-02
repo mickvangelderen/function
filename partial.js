@@ -1,7 +1,6 @@
 // @flow
 
 import _ from './_'
-import createConfigurablePropertyDescriptor from './createConfigurablePropertyDescriptor'
 
 /**
  * Symbol behind which the fixed arguments and the original function are stored.
@@ -73,17 +72,25 @@ export default function partial(args:Array<any>, func:Function):Function {
 			return func.apply(this, _mergeArguments(args, arguments))
 		},
 		{
-			name: createConfigurablePropertyDescriptor(func.name
-				? /^partial /.test(func.name)
-					? func.name
-					: `partial ${func.name}`
-				: 'partial'
-			),
-			length: createConfigurablePropertyDescriptor(Math.max(0, func.length - _argumentCount(args_))),
-			[_PARTIAL]: createConfigurablePropertyDescriptor({
-				args: args_,
-				func: func_
-			})
+			name: {
+				value: func.name
+					? /^partial /.test(func.name)
+						? func.name
+						: `partial ${func.name}`
+					: 'partial',
+				configurable: true
+			},
+			length: {
+				value: Math.max(0, func.length - _argumentCount(args_)),
+				configurable: true
+			},
+			[_PARTIAL]: {
+				value: {
+					args: args_,
+					func: func_
+				},
+				configurable: true
+			}
 		}
 	)
 }
