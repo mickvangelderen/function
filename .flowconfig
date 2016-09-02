@@ -1,9 +1,7 @@
 [ignore]
 <PROJECT_ROOT>/node_modules/\.*
 <PROJECT_ROOT>/examples/\.*
-<PROJECT_ROOT>/hooks/\.*
 <PROJECT_ROOT>/release/\.*
-<PROJECT_ROOT>/scripts/\.*
 
 [include]
 
