@@ -1,5 +1,5 @@
-export { default as _ } from './_'
-export { default as partial } from './partial'
-export { default as setFunctionArity } from './setFunctionArity'
-export { default as setFunctionName } from './setFunctionName'
-export { default as setFunctionNameAndArity } from './setFunctionNameAndArity'
+exports.partial = require('./partial')
+exports.PLACEHOLDER = require('./PLACEHOLDER')
+exports.set_function_arity = require('./set_function_arity')
+exports.set_function_name = require('./set_function_name')
+exports.set_function_name_and_arity = require('./set_function_name_and_arity')

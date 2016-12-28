@@ -1,6 +1,6 @@
-import guardedSpawnSync from '../scripts/utility/guardedSpawnSync'
-import { version } from '../package.json'
-import { join } from 'path'
+const guardedSpawnSync = require('../scripts/utility/guardedSpawnSync')
+const version = require('../package.json').version
+const join = require('path').join
 
 guardedSpawnSync('documentation', [ 'build',
 	'--output', join('documentation', version),

@@ -1,11 +1,11 @@
 /* eslint-env mocha */
-import expect from 'must'
-import setFunctionName from './setFunctionName'
+const expect = require('must')
+const set_function_name = require('./set_function_name')
 
-describe('setFunctionName', () => {
-	
+describe('set_function_name', () => {
+
 	it('should be a function', () => {
-		expect(setFunctionName).to.be.a.function()
+		expect(set_function_name).to.be.a.function()
 	})
 
 	it('should set the name of a function', () => {
@@ -19,7 +19,7 @@ describe('setFunctionName', () => {
 
 		expect(f.name).to.equal('')
 
-		setFunctionName('add', f)
+		set_function_name(f, 'add')
 
 		expect(f.name).to.equal('add')
 	})

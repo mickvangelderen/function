@@ -1,9 +1,9 @@
-import createFileTransformerSync from './utility/createFileTransformerSync'
-import createJsonTransformer from './utility/createJsonTransformer'
-import guardedSpawnSync from '../scripts/utility/guardedSpawnSync'
-import { join } from 'path'
-import { relative } from 'path'
-import { resolve } from 'path'
+const createFileTransformerSync = require('./utility/createFileTransformerSync')
+const createJsonTransformer = require('./utility/createJsonTransformer')
+const guardedSpawnSync = require('../scripts/utility/guardedSpawnSync')
+const join = require('path').join
+const relative = require('path').relative
+const resolve = require('path').resolve
 
 const workingDirectoryPath = join(__dirname, '..')
 const inputDirectoryPath = workingDirectoryPath
@@ -13,7 +13,6 @@ const copyFileSync = createFileTransformerSync(input => input)
 build({
 	inputDirectoryPath,
 	outputDirectoryPath,
-	preset: 'es2015-node4',
 	engines: {
 		node: '>=4.0.0'
 	}
@@ -22,7 +21,6 @@ build({
 function build({
 	inputDirectoryPath,
 	outputDirectoryPath,
-	preset,
 	engines
 }) {
 	// Build source files.
@@ -30,7 +28,6 @@ function build({
 		'*.js',
 		'--out-dir', relative(workingDirectoryPath, resolve(workingDirectoryPath, outputDirectoryPath)),
 		'--source-maps',
-		'--presets', preset,
 		'--ignore', 'node_modules/',
 		'--ignore', 'examples/',
 		'--ignore', 'release/',

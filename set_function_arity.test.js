@@ -1,11 +1,11 @@
 /* eslint-env mocha */
-import expect from 'must'
-import setFunctionArity from './setFunctionArity'
+const expect = require('must')
+const set_function_arity = require('./set_function_arity')
 
-describe('setFunctionArity', () => {
-	
+describe('set_function_arity', () => {
+
 	it('should be a function', () => {
-		expect(setFunctionArity).to.be.a.function()
+		expect(set_function_arity).to.be.a.function()
 	})
 
 	it('should set the arity of a function', () => {
@@ -15,7 +15,7 @@ describe('setFunctionArity', () => {
 
 		expect(add.length).to.equal(0)
 
-		setFunctionArity(2, add)
+		set_function_arity(add, 2)
 
 		expect(add.length).to.equal(2)
 	})

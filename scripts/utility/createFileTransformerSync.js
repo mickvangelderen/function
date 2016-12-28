@@ -1,9 +1,9 @@
-import { resolve } from 'path'
-import { dirname } from 'path'
-import { readFileSync } from 'fs'
-import { statSync } from 'fs'
-import { writeFileSync } from 'fs'
-import { mkdirSync } from 'fs'
+const resolve = require('path').resolve
+const dirname = require('path').dirname
+const readFileSync = require('fs').readFileSync
+const statSync = require('fs').statSync
+const writeFileSync = require('fs').writeFileSync
+const mkdirSync = require('fs').mkdirSync
 
 function createFileTransformerSync(transformation) {
 	return function transformFileSync({
@@ -44,4 +44,4 @@ function ensureDirectory(path) {
 	}
 }
 
-export default createFileTransformerSync
+module.exports = createFileTransformerSync

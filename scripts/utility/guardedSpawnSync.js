@@ -1,4 +1,4 @@
-import { spawnSync } from 'child_process'
+const spawnSync = require('child_process').spawnSync
 
 function guardedSpawnSync(app, args, opts) { // eslint-disable-line no-unused-vars
 	const spawn = spawnSync.apply(this, arguments)
@@ -7,4 +7,4 @@ function guardedSpawnSync(app, args, opts) { // eslint-disable-line no-unused-va
 	return spawn
 }
 
-export default guardedSpawnSync
+module.exports = guardedSpawnSync

@@ -1,59 +1,12 @@
 /* eslint-env mocha */
-import _ from './_'
-import partial from './partial'
-import { _argumentCount } from './partial'
-import { _mergeArguments } from './partial'
-import { _PARTIAL } from './partial'
+const _ = require('./PLACEHOLDER')
+const partial = require('./partial')
+const _PARTIAL_KEY = require('./_PARTIAL_KEY')
 
-import expect from 'must'
-
-describe('_mergeArguments', () => {
-
-	it('should be a function', () => {
-		expect(_mergeArguments).to.be.a.function()
-	})
-
-	it('should merge arguments', () => {
-		expect(_mergeArguments([      ], [      ])).to.eql([      ])
-		expect(_mergeArguments([ 1    ], [      ])).to.eql([ 1    ])
-		expect(_mergeArguments([      ], [ 1    ])).to.eql([ 1    ])
-		expect(_mergeArguments([ 1    ], [ 2    ])).to.eql([ 1, 2 ])
-		expect(_mergeArguments([ 1, 2 ], [      ])).to.eql([ 1, 2 ])
-		expect(_mergeArguments([      ], [ 1, 2 ])).to.eql([ 1, 2 ])
-	})
-
-	it('should merge arguments and overwrite placeholders', () => {
-		expect(_mergeArguments([ _ ], [])).to.eql([ _ ])
-		expect(_mergeArguments([], [ _ ])).to.eql([ _ ])
-		expect(_mergeArguments([ _ ], [ _ ])).to.eql([ _ ])
-		expect(_mergeArguments([ 1 ], [ _ ])).to.eql([ 1, _ ])
-		expect(_mergeArguments([ _ ], [ 1 ])).to.eql([ 1 ])
-		expect(_mergeArguments([ 1, _, 3 ], [ 2 ])).to.eql([ 1, 2, 3 ])
-		expect(_mergeArguments([ _, _, 3 ], [ 1, _, 4 ])).to.eql([ 1, _, 3, 4 ])
-	})
-
-})
-
-describe('_argumentCount', () => {
-	
-	it('should be a function', () => {
-		expect(_argumentCount).to.be.a.function()
-	})
-
-	it('should return the number of non-placeholder arguments', () => {
-		expect(_argumentCount([])).to.equal(0)
-		expect(_argumentCount([ _ ])).to.equal(0)
-		expect(_argumentCount([ 1 ])).to.equal(1)
-		expect(_argumentCount([ _, 2 ])).to.equal(1)
-		expect(_argumentCount([ 1, _ ])).to.equal(1)
-		expect(_argumentCount([ 1, _, 3 ])).to.equal(2)
-		expect(_argumentCount([ 1, 2, _ ])).to.equal(2)
-	})
-
-})
+const expect = require('must')
 
 describe('partial', () => {
-	
+
 	it('should be a function', () => {
 		expect(partial).to.be.a.function()
 	})
@@ -63,11 +16,11 @@ describe('partial', () => {
 			return a + b
 		}
 
-		const inc = partial([ 1 ], add)
+		const inc = partial(add, [ 1 ])
 
 		expect(inc.name).to.equal('partial add')
 		expect(inc.length).to.equal(1)
-		expect(inc[_PARTIAL]).to.eql({
+		expect(inc[_PARTIAL_KEY]).to.eql({
 			func: add,
 			args: [ 1 ]
 		})
@@ -79,12 +32,12 @@ describe('partial', () => {
 			return a/b
 		}
 
-		const div12 = partial([ 12 ], div)
-		const two = partial([ 6 ], div12)
+		const div12 = partial(div, [ 12 ])
+		const two = partial(div12, [ 6 ])
 
 		expect(two.name).to.equal('partial div')
 		expect(two.length).to.equal(0)
-		expect(two[_PARTIAL]).to.eql({
+		expect(two[_PARTIAL_KEY]).to.eql({
 			func: div,
 			args: [ 12, 6 ]
 		})
@@ -97,20 +50,16 @@ describe('partial', () => {
 		}
 
 		expect(
-			partial([ 6 ], 
-				partial([ 12, _ ], div)
-			)()
+			partial(partial(div, [ 12, _ ]), [ 6 ])()
 		).to.equal(2)
 
 		expect(
-			partial([ 12 ], 
-				partial([ _, 6 ], div)
-			)()
+			partial(partial(div, [ _, 6 ]), [ 12 ])()
 		).to.equal(2)
 	})
 
 	it('should not return a function with a negative arity', () => {
-		expect(partial([ 1 ], function () {}).length).to.equal(0)
+		expect(partial(() => {}, [ 1 ]).length).to.equal(0)
 	})
 
 })

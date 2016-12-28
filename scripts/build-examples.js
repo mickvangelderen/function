@@ -1,8 +1,8 @@
-import { version } from '../package.json'
-import { join } from 'path'
-import createFileTransformerSync from './utility/createFileTransformerSync'
-import createJsonTransformer from './utility/createJsonTransformer'
-import guardedSpawnSync from '../scripts/utility/guardedSpawnSync'
+const version = require('../package.json').version
+const join = require('path').join
+const createFileTransformerSync = require('./utility/createFileTransformerSync')
+const createJsonTransformer = require('./utility/createJsonTransformer')
+const guardedSpawnSync = require('../scripts/utility/guardedSpawnSync')
 
 // Set version number in package.json
 createFileTransformerSync(

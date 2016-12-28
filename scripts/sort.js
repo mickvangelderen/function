@@ -1,9 +1,9 @@
-import createFileTransformerSync from './utility/createFileTransformerSync'
-import createJsonTransformer from './utility/createJsonTransformer'
-import glob from 'glob'
-import sortObject from 'sort-object-circular'
-import sortLines from './utility/sortLines'
-import { join } from 'path'
+const createFileTransformerSync = require('./utility/createFileTransformerSync')
+const createJsonTransformer = require('./utility/createJsonTransformer')
+const glob = require('glob')
+const sortObject = require('sort-object-circular').default
+const sortLines = require('./utility/sortLines')
+const join = require('path').join
 
 const workingDirectoryPath = join(__dirname, '..')
 
@@ -39,4 +39,4 @@ const linesResults = glob.sync('**/{.eslintignore,.gitignore,.npmignore}', {
 	})
 })
 
-export default [ ...jsonResults, ...linesResults ]
+module.exports = [ ...jsonResults, ...linesResults ]

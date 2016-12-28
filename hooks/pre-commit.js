@@ -1,7 +1,7 @@
 #!node_modules/.bin/babel-node
 
-import results from '../scripts/sort'
-import guardedSpawnSync from '../scripts/utility/guardedSpawnSync'
+const results = require('../scripts/sort')
+const guardedSpawnSync = require('../scripts/utility/guardedSpawnSync')
 
 const changes = results
 .map(result => result.absoluteOutputFilePaths.length)

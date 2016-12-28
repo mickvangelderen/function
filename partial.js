@@ -1,51 +1,13 @@
 // @flow
 
-import _ from './_'
-
-/**
- * Symbol behind which the fixed arguments and the original function are stored.
- * @private
- */
-export const _PARTIAL = Symbol('partial information')
-
-/**
- * Merges arguments, taking the placeholder into account.
- * @private
- */
-export function _mergeArguments(argu:Array<any>, ments:Array<any>):Array<any> {
-	const args = []
-	let i = 0;
-	let j = 0;
-	while(i < argu.length) {
-		const a = argu[i]
-		args[i++] = a === _
-			? j < ments.length
-				? ments[j++]
-				: _
-			: a
-	}
-	while(j < ments.length) {
-		args[i++] = ments[j++]
-	}
-	return args
-}
-
-/**
- * Counts the number of non-placeholder arguments.
- * @private
- */
-export function _argumentCount(args:Array<any>):number {
-	let count = 0
-	for (let i = 0; i < args.length; i++) {
-		if (args[i] !== _) count++
-	}
-	return count
-}
+const _argument_count = require('./_argument_count')
+const _merge_arguments = require('./_merge_arguments')
+const _PARTIAL_KEY = require('./_PARTIAL_KEY')
 
 /**
  * Create a new version of the function where the given arguments are already filled in.
  */
-export default function partial(args:Array<any>, func:Function):Function {
+module.exports = function partial(func:Function, args:Array<any>):Function {
 	if (typeof args !== 'object' || args === null || !args.hasOwnProperty(
 		'length')) {
 		throw new TypeError('Expected an iterable object.')
@@ -57,9 +19,9 @@ export default function partial(args:Array<any>, func:Function):Function {
 	let args_
 	let func_
 
-	if (func.hasOwnProperty(_PARTIAL)) {
-		const p = func[_PARTIAL]
-		args_ = _mergeArguments(p.args, args)
+	if (func.hasOwnProperty(_PARTIAL_KEY)) {
+		const p = func[_PARTIAL_KEY]
+		args_ = _merge_arguments(p.args, args)
 		func_ = p.func
 	} else {
 		args_ = args
@@ -68,8 +30,8 @@ export default function partial(args:Array<any>, func:Function):Function {
 
 	return Object.defineProperties(
 		function self() {
-			const { args, func } = self[_PARTIAL]
-			return func.apply(this, _mergeArguments(args, arguments))
+			const { args, func } = self[_PARTIAL_KEY]
+			return func.apply(this, _merge_arguments(args, arguments))
 		},
 		{
 			name: {
@@ -81,10 +43,10 @@ export default function partial(args:Array<any>, func:Function):Function {
 				configurable: true
 			},
 			length: {
-				value: Math.max(0, func.length - _argumentCount(args_)),
+				value: Math.max(0, func.length - _argument_count(args_)),
 				configurable: true
 			},
-			[_PARTIAL]: {
+			[_PARTIAL_KEY]: {
 				value: {
 					args: args_,
 					func: func_

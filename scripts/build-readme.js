@@ -1,9 +1,9 @@
-import remark from 'remark'
-import { version } from '../package.json'
-import { createReadStream } from 'fs'
-import { createWriteStream } from 'fs'
-import { renameSync } from 'fs'
-import guardedSpawnSync from '../scripts/utility/guardedSpawnSync'
+const remark = require('remark')
+const version = require('../package.json').version
+const createReadStream = require('fs').createReadStream
+const createWriteStream = require('fs').createWriteStream
+const renameSync = require('fs').renameSync
+const guardedSpawnSync = require('../scripts/utility/guardedSpawnSync')
 
 const HEADING_VALUE = 'Documentation'
 const README_FILE = 'readme.md'
