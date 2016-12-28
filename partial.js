@@ -29,8 +29,8 @@ module.exports = function partial(func:Function, args:Array<any>):Function {
 	}
 
 	return Object.defineProperties(
-		function self() {
-			const { args, func } = self[_PARTIAL_KEY]
+		function partial() {
+			const { args, func } = partial[_PARTIAL_KEY]
 			return func.apply(this, _merge_arguments(args, arguments))
 		},
 		{
