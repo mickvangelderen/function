@@ -8,12 +8,12 @@ const _PARTIAL_KEY = require('./_PARTIAL_KEY')
  * Create a new version of the function where the given arguments are already filled in.
  */
 module.exports = function partial(func:Function, args:Array<any>):Function {
+	if (typeof func !== 'function') {
+		throw new TypeError('Expected a function.')
+	}
 	if (typeof args !== 'object' || args === null || !args.hasOwnProperty(
 		'length')) {
 		throw new TypeError('Expected an iterable object.')
-	}
-	if (typeof func !== 'function') {
-		throw new TypeError('Expected a function.')
 	}
 
 	let args_
