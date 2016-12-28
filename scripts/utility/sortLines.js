@@ -1,7 +1,7 @@
-import { EOL } from 'os'
+const EOL = require('os').EOL
 
 // Sort groups of non-empty lines.
-export default function sortLines(input) {
+module.exports = function sortLines(input) {
 	// Split the input string into parts.
 	const parts = input.split(/(\r?\n|\r)/)
 

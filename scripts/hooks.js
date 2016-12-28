@@ -1,15 +1,15 @@
-import { chmodSync } from 'fs'
-import { join } from 'path'
-import { dirname } from 'path'
-import { statSync } from 'fs'
-import { lstatSync } from 'fs'
-import { readdirSync } from 'fs'
-import { readlinkSync } from 'fs'
-import { relative } from 'path'
-import { resolve } from 'path'
-import { symlinkSync } from 'fs'
-import { unlinkSync } from 'fs'
-import { X_OK } from 'fs'
+const chmodSync = require('fs').chmodSync
+const join = require('path').join
+const dirname = require('path').dirname
+const statSync = require('fs').statSync
+const lstatSync = require('fs').lstatSync
+const readdirSync = require('fs').readdirSync
+const readlinkSync = require('fs').readlinkSync
+const relative = require('path').relative
+const resolve = require('path').resolve
+const symlinkSync = require('fs').symlinkSync
+const unlinkSync = require('fs').unlinkSync
+const X_OK = require('fs').X_OK
 
 const workingDirectoryPath = join(__dirname, '..')
 const inputDirectoryPath = join(workingDirectoryPath, 'hooks/')

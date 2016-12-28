@@ -1,4 +1,4 @@
-import sortObject from 'sort-object-circular'
+const sortObject = require('sort-object-circular').default
 
 function createJsonTransformer(transformation, options = {}) {
 	const {
@@ -9,6 +9,7 @@ function createJsonTransformer(transformation, options = {}) {
 	const sortCall = sort
 		? sortObject
 		: x => x
+
 	return function transformJson(input) {
 		return JSON.stringify(
 			sortCall(
@@ -22,4 +23,4 @@ function createJsonTransformer(transformation, options = {}) {
 	}
 }
 
-export default createJsonTransformer
+module.exports = createJsonTransformer

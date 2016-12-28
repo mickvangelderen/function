@@ -3,6 +3,6 @@
     "flow-comments"
   ],
   "presets": [
-    "es2015-node4"
+    "latest"
   ]
 }
