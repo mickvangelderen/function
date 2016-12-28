@@ -2,7 +2,7 @@ Wanted to set the name of a function? Or the expected number of arguments? The `
 
 # Documentation
 
-Documentation for 0.6.0 can be found [here](https://mickvangelderen.github.io/function/0.6.0/ "Documentation for 0.6.0").
+Documentation for 0.6.1 can be found [here](https://mickvangelderen.github.io/function/0.6.1/ "Documentation for 0.6.1").
 
 # Contributing
 

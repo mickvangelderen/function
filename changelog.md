@@ -1,5 +1,15 @@
+<a name="0.6.1"></a>
+## [0.6.1](https://github.com/mickvangelderen/function/compare/0.6.0...v0.6.1) (2016-12-28)
+
+
+### Bug Fixes
+
+* Anonymous function name ([d7acbfb](https://github.com/mickvangelderen/function/commit/d7acbfb))
+
+
+
 <a name="0.6.0"></a>
-# [0.6.0](https://github.com/mickvangelderen/function/compare/0.3.0...v0.6.0) (2016-12-28)
+# [0.6.0](https://github.com/mickvangelderen/function/compare/0.3.0...0.6.0) (2016-12-28)
 
 
 ### Code Refactoring
