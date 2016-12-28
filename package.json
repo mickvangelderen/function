@@ -53,5 +53,5 @@
     "test": "mocha \"*.test.js\"",
     "version": "npm run build-documentation && npm run build-readme && npm run build-examples && npm run build-changelog"
   },
-  "version": "0.3.0"
+  "version": "0.4.0"
 }
