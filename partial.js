@@ -36,7 +36,7 @@ module.exports = function partial(func:Function, args:Array<any>):Function {
 		{
 			name: {
 				value: func.name
-					? /^partial /.test(func.name)
+					? /^partial( |$)/.test(func.name)
 						? func.name
 						: `partial ${func.name}`
 					: 'partial',

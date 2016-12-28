@@ -42,6 +42,9 @@ describe('partial', () => {
 			args: [ 12, 6 ]
 		})
 		expect(two()).to.equal(2)
+
+		expect(partial(function() {}, []).name).to.equal('partial')
+		expect(partial(partial(function () {}, []), []).name).to.equal('partial')
 	})
 
 	it('should take into account placeholders', () => {
